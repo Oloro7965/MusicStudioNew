@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStudio.API", "MusicStudio.API\MusicStudio.API.csproj", "{8BB50B34-76CA-4983-AEEC-FC4104F06B0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStudio.Core", "MusicStudio.Core\MusicStudio.Core.csproj", "{C8CE6602-515B-446B-A271-6ADD5770EFB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStudio.Application", "MusicStudio.Application\MusicStudio.Application.csproj", "{72C928C7-99CF-45D6-A72D-59896DEED416}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStudio.Infraestructure", "MusicStudio.Infraestructure\MusicStudio.Infraestructure.csproj", "{E3FB09FB-93D9-461D-8207-FC8F1AD05EAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BB50B34-76CA-4983-AEEC-FC4104F06B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB50B34-76CA-4983-AEEC-FC4104F06B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB50B34-76CA-4983-AEEC-FC4104F06B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB50B34-76CA-4983-AEEC-FC4104F06B0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8CE6602-515B-446B-A271-6ADD5770EFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8CE6602-515B-446B-A271-6ADD5770EFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8CE6602-515B-446B-A271-6ADD5770EFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8CE6602-515B-446B-A271-6ADD5770EFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C928C7-99CF-45D6-A72D-59896DEED416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C928C7-99CF-45D6-A72D-59896DEED416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C928C7-99CF-45D6-A72D-59896DEED416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C928C7-99CF-45D6-A72D-59896DEED416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3FB09FB-93D9-461D-8207-FC8F1AD05EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3FB09FB-93D9-461D-8207-FC8F1AD05EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3FB09FB-93D9-461D-8207-FC8F1AD05EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3FB09FB-93D9-461D-8207-FC8F1AD05EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D55D8B58-CBEF-4764-B376-A644389D0270}
+	EndGlobalSection
+EndGlobal
