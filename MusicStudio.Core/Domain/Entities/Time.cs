@@ -10,21 +10,21 @@ namespace MusicStudio.Core.Domain.Entities
     {
         public Time(Guid salaId, Room room, TimeSpan startTime, TimeSpan endTime, DateTime dataEspecifica)
         {
-            SalaId = salaId;
+            RoomId = salaId;
             this.room = room;
             StartTime = startTime;
             EndTime = endTime;
             date = dataEspecifica;
+            IsAvailable = true;
         }
 
-        public Guid SalaId { get; private set; }
+        public Guid RoomId { get; private set; }
         public Room room { get; private set; }
 
         //public DayOfWeek DiaSemana { get; set; } // Enum: Domingo, Segunda, etc.
         public TimeSpan StartTime { get; private set; }
         public TimeSpan EndTime { get; private set; }
-
-        // Se quiser controlar disponibilidade por data específica:
         public DateTime date { get; private set; }
+        public bool IsAvailable { get; private set; }
     }
 }

@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MusicStudio.Application.Commands.CreateUserCommand;
+using MusicStudio.Application.Commands.DeleteUserCommand;
+using MusicStudio.Application.Commands.UpdateUserCommand;
+using MusicStudio.Application.Queries.GetAllUsersQuery;
+using MusicStudio.Application.Queries.GetUserQuery;
 
 namespace MusicStudio.API.Controllers
 {
@@ -7,79 +13,80 @@ namespace MusicStudio.API.Controllers
     [Route("api/Users")]
     public class UserController : ControllerBase
     {
-        // GET: UserController
-        public ActionResult Index()
+        private readonly IMediator _mediator;
+
+        public UserController(IMediator mediator)
         {
-            return Ok();
+            _mediator = mediator;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllContacts()
+        {
+
+            var Query = new GetAllUsersQuery();
+
+            var contacts = await _mediator.Send(Query);
+
+            return Ok(contacts);
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(Guid id)
         {
-            return Ok();
+            var query = new GetUserQuery(id);
+
+            var contact = await _mediator.Send(query);
+
+            if (!contact.IsSuccess)
+            {
+                return BadRequest(contact.Message);
+            }
+
+            return Ok(contact);
         }
 
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return Ok();
-        }
-
-        // POST: UserController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return Ok();
-            }
-        }
+            var ContactId = await _mediator.Send(command);
 
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return Ok();
+            return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
         }
-
-        // POST: UserController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [Route("Scheduling")]
+        public async Task<IActionResult> CreateScheduling(CreateUserCommand command)
         {
-            try
+            var ContactId = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateContact(UpdateUserCommand command)
+        {
+            //command.Id =id;
+
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest(result.Message);
             }
-            catch
-            {
-                return Ok();
-            }
+
+            return NoContent();
         }
 
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteContact(Guid id)
         {
+            var command = new DeleteUserCommand(id);
+
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            //_userService.Delete(id);
             return Ok();
-        }
-
-        // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return Ok();
-            }
         }
     }
 }

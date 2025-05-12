@@ -1,18 +1,17 @@
-﻿using System;
+﻿using MusicStudio.Core.Domain.Entities;
+using MusicStudio.Core.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicStudio.Core.Domain.Entities
+namespace MusicStudio.Application.ViewModels
 {
-    public class Scheduling : BaseEntity
+    public class ScheduleViewModel
     {
-        public Guid UserId { get; private set; }
         public User user { get; private set; }
         public Time ScheduledTime { get; private set; }
-        public Guid TimeId { get; private set; }
-        public Guid RoomId { get; private set; }
         public Room room { get; private set; }
         public TimeSpan StartTime { get; private set; }
         public TimeSpan EndTime { get; private set; }

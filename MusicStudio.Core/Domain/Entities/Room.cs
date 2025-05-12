@@ -11,10 +11,10 @@ namespace MusicStudio.Core.Domain.Entities
         public Room(string name)
         {
             Name = name;
-            AvailableSchedules = new List<Time>();
+            RegisteredSchedules = new List<Time>();
         }
 
-        public string Name { get; set; }
-        public List<Time> AvailableSchedules { get; private set; }
+        public string Name { get; private set; }
+        public List<Time> RegisteredSchedules { get; private set; }
     }
 }
