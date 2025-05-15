@@ -12,9 +12,11 @@ namespace MusicStudio.Core.Domain.Entities
         {
             Name = name;
             RegisteredSchedules = new List<Time>();
+            IsDeleted = false;
         }
 
         public string Name { get; private set; }
         public List<Time> RegisteredSchedules { get; private set; }
+        public bool IsDeleted { get; private set; }
     }
 }

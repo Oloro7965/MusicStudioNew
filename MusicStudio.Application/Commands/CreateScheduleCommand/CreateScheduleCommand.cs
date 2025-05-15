@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MusicStudio.Application.Commands.CreateScheduleCommand
 {
-    public class CreateScheduleCommand: IRequest<ResultViewModel>
+    public class CreateScheduleCommand: IRequest<ResultViewModel<object>>
     {
         public Guid UserId { get;  set; }
         //public Time ScheduledTime { get; private set; }
@@ -17,6 +17,6 @@ namespace MusicStudio.Application.Commands.CreateScheduleCommand
         public Guid RoomId { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-        public DateTime date { get;  set; }
+        public DateTime Date { get;  set; }
     }
 }

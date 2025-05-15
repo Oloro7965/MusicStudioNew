@@ -9,35 +9,31 @@ using System.Threading.Tasks;
 
 namespace MusicStudio.Infraestructure.Persistance.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class RoomRepository : IRoomRepository
     {
         private readonly MusicStudioDbContext _dbcontext;
 
-        public UserRepository(MusicStudioDbContext dbcontext)
+        public RoomRepository(MusicStudioDbContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
 
-        public async Task AddAsync(User user)
+        public async Task AddAsync(Room room)
         {
-            await _dbcontext.Users.AddAsync(user);
+            await _dbcontext.Rooms.AddAsync(room);
 
             await _dbcontext.SaveChangesAsync();
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<Room>> GetAllAsync()
         {
-            return await _dbcontext.Users.Where(u => u.IsDeleted.Equals(false)).ToListAsync();
-            //return await _dbcontext.Users.ToListAsync();
+            return await _dbcontext.Rooms.Where(u => u.IsDeleted.Equals(false)).ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(Guid id)
+        public async Task<Room> GetByIdAsync(Guid id)
         {
 
-            //return await _dbcontext.Users.Where(c => c.IsDeleted.Equals(false) && c.Id == id).Include(c => c.FieldWork)
-
-            //.SingleOrDefaultAsync();
-            return await _dbcontext.Users.Where(c => c.Id == id)
+            return await _dbcontext.Rooms.Where(c => c.IsDeleted.Equals(false) && c.Id == id)
 
             .SingleOrDefaultAsync();
         }

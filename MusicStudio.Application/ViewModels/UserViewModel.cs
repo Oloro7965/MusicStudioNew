@@ -10,12 +10,21 @@ namespace MusicStudio.Application.ViewModels
 {
     public class UserViewModel
     {
+        public UserViewModel(string nome, string email, string senhaHash, string role, List<Scheduling> agendamentos)
+        {
+            Nome = nome;
+            Email = email;
+            SenhaHash = senhaHash;
+            Role = role;
+            Agendamentos = agendamentos;
+        }
+
         public string Nome { get; private set; }
         public string Email { get; private set; }
-        public string SenhaHash { get; private set; }  // Armazenar hash, nunca a senha pura
-        public EUserRole Role { get; private set; }
+        public string SenhaHash { get; private set; } 
+        public string Role { get; private set; }
 
-        // Navegação opcional, como Lista de Agendamentos
-        public List<Scheduling> Agendamentos { get; set; }
+        
+        public List<Scheduling> Agendamentos { get; private set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MusicStudio.Application.Commands.CreateUserCommand
 {
-    public class CreateUserCommand : IRequest<ResultViewModel>
+    public class CreateUserCommand : IRequest<ResultViewModel<object>>
     {
         public string Name { get; set; }
         public string Email { get; set; }

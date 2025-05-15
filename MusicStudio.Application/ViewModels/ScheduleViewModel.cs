@@ -10,6 +10,16 @@ namespace MusicStudio.Application.ViewModels
 {
     public class ScheduleViewModel
     {
+        public ScheduleViewModel(User user, Time scheduledTime, Room room, TimeSpan startTime, TimeSpan endTime, DateTime date)
+        {
+            this.user = user;
+            ScheduledTime = scheduledTime;
+            this.room = room;
+            StartTime = startTime;
+            EndTime = endTime;
+            this.date = date;
+        }
+
         public User user { get; private set; }
         public Time ScheduledTime { get; private set; }
         public Room room { get; private set; }

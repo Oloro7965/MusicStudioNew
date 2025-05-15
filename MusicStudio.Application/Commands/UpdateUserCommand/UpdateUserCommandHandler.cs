@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MusicStudio.Application.ViewModels;
+using MusicStudio.Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,28 @@ namespace MusicStudio.Application.Commands.UpdateUserCommand
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ResultViewModel>
     {
-        public Task<ResultViewModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        private readonly IUserRepository  _userRepository;
+
+        public UpdateUserCommandHandler(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+        }
+
+        public async Task<ResultViewModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetByIdAsync(request.id);
+
+            if (user is null)
+            {
+                return ResultViewModel.Error("usuário não encontrado");
+            }
+
+            user.Update(request.Email, request.PasswordHash);
+
+            //_dbcontext.Update(user);  
+            _userRepository.SaveChangesAsync();
+
+            return ResultViewModel.Success();
         }
     }
 }

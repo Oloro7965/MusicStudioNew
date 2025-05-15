@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace MusicStudio.Core.Domain.Entities
             SenhaHash = senhaHash;
             Role = role;
             Agendamentos = new List<Scheduling>();
+            IsDeleted = false;
         }
 
         public string Nome { get; private set; }
@@ -25,5 +27,17 @@ namespace MusicStudio.Core.Domain.Entities
 
         // Navegação opcional, como Lista de Agendamentos
         public List<Scheduling> Agendamentos { get; set; }
+        public bool IsDeleted { get; private set; }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
+        public void Update(string email, string password)
+        {
+            Email = email;
+
+            SenhaHash = password;
+
+        }
     }
 }

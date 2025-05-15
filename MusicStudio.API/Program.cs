@@ -1,11 +1,21 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using MusicStudio.Application.Commands.CreateUserCommand;
+using MusicStudio.Core.Domain.Repositories;
 using MusicStudio.Core.Services;
 using MusicStudio.Infraestructure.Auth;
+using MusicStudio.Infraestructure.Persistance;
+using MusicStudio.Infraestructure.Persistance.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("MusicStudio");
+builder.Services.AddDbContext<MusicStudioDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddMediatR(opt => opt.RegisterServicesFromAssemblyContaining(typeof(CreateUserCommand)));
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<ITimeRepository, TimeRepository>();
+builder.Services.AddScoped<ISchedulingRepository, SchedulingRepository>();
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

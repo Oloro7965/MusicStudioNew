@@ -1,16 +1,18 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MusicStudio.Application.Commands.CreateScheduleCommand;
 using MusicStudio.Application.Commands.CreateUserCommand;
 using MusicStudio.Application.Commands.DeleteUserCommand;
 using MusicStudio.Application.Commands.UpdateUserCommand;
+using MusicStudio.Application.Queries.GetAllSchedulingQuery;
 using MusicStudio.Application.Queries.GetAllUsersQuery;
 using MusicStudio.Application.Queries.GetUserQuery;
 
 namespace MusicStudio.API.Controllers
 {
     [ApiController]
-    [Route("api/Users")]
+    [Route("Api")]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,7 +21,7 @@ namespace MusicStudio.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet]
+        [HttpGet("user/{id}/schedulings")]
         public async Task<IActionResult> GetAllContacts()
         {
 
@@ -29,7 +31,16 @@ namespace MusicStudio.API.Controllers
 
             return Ok(contacts);
         }
+        [HttpGet("schedulings")]
+        public async Task<IActionResult> GetAllSchedulings()
+        {
 
+           var Query = new GetAllSchedulingQuery();
+
+            var contacts = await _mediator.Send(Query);
+
+            return Ok(contacts);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
@@ -60,6 +71,14 @@ namespace MusicStudio.API.Controllers
 
             return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
         }
+        //[HttpPost]
+        //[Route("Scheduling")]
+        //public async Task<IActionResult> CreateScheduling(CreateScheduleCommand command)
+        //{
+        //    var ContactId = await _mediator.Send(command);
+
+        //    return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
+        //}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact(UpdateUserCommand command)
         {
@@ -76,7 +95,7 @@ namespace MusicStudio.API.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContact(Guid id)
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
             var command = new DeleteUserCommand(id);
 
