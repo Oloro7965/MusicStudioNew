@@ -10,6 +10,7 @@ using MusicStudio.Application.Queries.GetAllSchedulingQuery;
 using MusicStudio.Application.Queries.GetAllUsersQuery;
 using MusicStudio.Application.Queries.GetSchedulingById;
 using MusicStudio.Application.Queries.GetUserQuery;
+using MusicStudio.Core.Domain.Entities;
 
 namespace MusicStudio.API.Controllers
 {
@@ -29,9 +30,9 @@ namespace MusicStudio.API.Controllers
 
             var Query = new GetAllSchedulingQuery();
 
-            var contacts = await _mediator.Send(Query);
+            var schedulings = await _mediator.Send(Query);
 
-            return Ok(contacts);
+            return Ok(schedulings);
         }
         [HttpGet("user/{id}/schedulings")]
         public async Task<IActionResult> GetAllSchedulingByUserId(Guid id)
@@ -39,28 +40,28 @@ namespace MusicStudio.API.Controllers
 
             var Query = new GetAllSchedulingByUserIdQuery(id);
 
-            var contacts = await _mediator.Send(Query);
+            var schedulingsById = await _mediator.Send(Query);
 
-            return Ok(contacts);
+            return Ok(schedulingsById);
         }
         [HttpGet("scheduling/{id}")]
         public async Task<IActionResult> GetSchedulingById(Guid id)
         {
             var query = new GetSchedulingByIdQuery(id);
 
-            var contact = await _mediator.Send(query);
+            var scheduling = await _mediator.Send(query);
 
-            if (!contact.IsSuccess)
+            if (!scheduling.IsSuccess)
             {
-                return BadRequest(contact.Message);
+                return BadRequest(scheduling.Message);
             }
 
-            return Ok(contact);
+            return Ok(scheduling);
         }
         [HttpPost]
         public async Task<IActionResult> CreateScheduling( CreateScheduleCommand command)
         {
-            var ContactId = await _mediator.Send(command);
+            var SchedulingId = await _mediator.Send(command);
 
             //return CreatedAtAction(nameof(GetSchedulingById), new { id = ContactId }, command);
             return Ok();
@@ -77,7 +78,7 @@ namespace MusicStudio.API.Controllers
             {
                 return BadRequest(result.Message);
             }
-            //_userService.Delete(id);
+       
             return Ok();
         }
     }

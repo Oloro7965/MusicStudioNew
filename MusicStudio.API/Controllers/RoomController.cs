@@ -1,7 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MusicStudio.Application.Commands.CreateRoomCommand;
+using MusicStudio.Application.Commands.CreateTimeCommand;
 using MusicStudio.Application.Commands.CreateUserCommand;
 using MusicStudio.Application.Commands.DeleteUserCommand;
+using MusicStudio.Application.Commands.UpdateTimeCommand;
 using MusicStudio.Application.Commands.UpdateUserCommand;
 using MusicStudio.Application.Queries.GetAllUsersQuery;
 using MusicStudio.Application.Queries.GetUserQuery;
@@ -25,9 +28,9 @@ namespace MusicStudio.API.Controllers
 
             var Query = new GetAllUsersQuery();
 
-            var contacts = await _mediator.Send(Query);
+            var rooms = await _mediator.Send(Query);
 
-            return Ok(contacts);
+            return Ok(rooms);
         }
 
         [HttpGet("{id}")]
@@ -35,33 +38,33 @@ namespace MusicStudio.API.Controllers
         {
             var query = new GetUserQuery(id);
 
-            var contact = await _mediator.Send(query);
+            var room = await _mediator.Send(query);
 
-            if (!contact.IsSuccess)
+            if (!room.IsSuccess)
             {
-                return BadRequest(contact.Message);
+                return BadRequest(room.Message);
             }
 
-            return Ok(contact);
+            return Ok(room);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRoom(CreateUserCommand command)
+        public async Task<IActionResult> CreateRoom(CreateRoomCommand command)
         {
-            var ContactId = await _mediator.Send(command);
+            var RoomId = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetRoomById), new { id = ContactId }, command);
+            return CreatedAtAction(nameof(GetRoomById), new { id = RoomId }, command);
         }
         [HttpPost]
         [Route("Scheduling")]
-        public async Task<IActionResult> CreateTime(CreateUserCommand command)
+        public async Task<IActionResult> CreateTime(CreateTimeCommand command)
         {
-            var ContactId = await _mediator.Send(command);
+            var TimeId = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetRoomById), new { id = ContactId }, command);
+            return CreatedAtAction(nameof(GetRoomById), new { id = TimeId }, command);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTime(UpdateUserCommand command)
+        public async Task<IActionResult> UpdateTime(UpdateTimeCommand command)
         {
             //command.Id =id;
 

@@ -27,34 +27,34 @@ namespace MusicStudio.API.Controllers
 
             var Query = new GetAllUsersQuery();
 
-            var contacts = await _mediator.Send(Query);
+            var users = await _mediator.Send(Query);
 
-            return Ok(contacts);
+            return Ok(users);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
             var query = new GetUserQuery(id);
 
-            var contact = await _mediator.Send(query);
+            var user = await _mediator.Send(query);
 
-            if (!contact.IsSuccess)
+            if (!user.IsSuccess)
             {
-                return BadRequest(contact.Message);
+                return BadRequest(user.Message);
             }
 
-            return Ok(contact);
+            return Ok(user);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
-            var ContactId = await _mediator.Send(command);
+            var UserId = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
+            return CreatedAtAction(nameof(GetUserById), new { id = UserId }, command);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateContact(UpdateUserCommand command)
+        public async Task<IActionResult> UpdateUsert(UpdateUserCommand command)
         {
             //command.Id =id;
 
