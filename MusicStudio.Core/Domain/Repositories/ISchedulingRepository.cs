@@ -12,6 +12,7 @@ namespace MusicStudio.Core.Domain.Repositories
         Task<List<Scheduling>> GetAllAsync();
 
         Task AddAsync(Scheduling scheduling);
+        Task<List<Scheduling>> GetByUserIdAsync(Guid UserId);
         Task<Scheduling> GetByIdAsync(Guid ScheduleId);
         Task SaveChangesAsync();
     }

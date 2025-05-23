@@ -12,7 +12,7 @@ using MusicStudio.Application.Queries.GetUserQuery;
 namespace MusicStudio.API.Controllers
 {
     [ApiController]
-    [Route("Api")]
+    [Route("Api/Users")]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,21 +21,11 @@ namespace MusicStudio.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet("user/{id}/schedulings")]
-        public async Task<IActionResult> GetAllContacts()
+        [HttpGet()]
+        public async Task<IActionResult> GetAllUsers()
         {
 
             var Query = new GetAllUsersQuery();
-
-            var contacts = await _mediator.Send(Query);
-
-            return Ok(contacts);
-        }
-        [HttpGet("schedulings")]
-        public async Task<IActionResult> GetAllSchedulings()
-        {
-
-           var Query = new GetAllSchedulingQuery();
 
             var contacts = await _mediator.Send(Query);
 
@@ -63,22 +53,6 @@ namespace MusicStudio.API.Controllers
 
             return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
         }
-        [HttpPost]
-        [Route("Scheduling")]
-        public async Task<IActionResult> CreateScheduling(CreateUserCommand command)
-        {
-            var ContactId = await _mediator.Send(command);
-
-            return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
-        }
-        //[HttpPost]
-        //[Route("Scheduling")]
-        //public async Task<IActionResult> CreateScheduling(CreateScheduleCommand command)
-        //{
-        //    var ContactId = await _mediator.Send(command);
-
-        //    return CreatedAtAction(nameof(GetUserById), new { id = ContactId }, command);
-        //}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact(UpdateUserCommand command)
         {

@@ -36,6 +36,11 @@ namespace MusicStudio.Infraestructure.Persistance.Repositories
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<List<Scheduling>> GetByUserIdAsync(Guid userId)
+        {
+            return await _dbcontext.Schedulings.Where(u => u.IsDeleted.Equals(false) && u.UserId==userId).ToListAsync();
+        }
+
         public async Task SaveChangesAsync()
         {
             await _dbcontext.SaveChangesAsync();

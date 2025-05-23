@@ -8,7 +8,7 @@ namespace MusicStudio.Core.Domain.Entities
 {
     public class Time:BaseEntity
     {
-        public Time(Guid salaId, Room room, TimeSpan startTime, TimeSpan endTime, DateTime dataEspecifica)
+        public Time(Guid salaId, TimeSpan startTime, TimeSpan endTime, DateTime dataEspecifica)
         {
             RoomId = salaId;
             this.room = room;
@@ -16,6 +16,7 @@ namespace MusicStudio.Core.Domain.Entities
             EndTime = endTime;
             date = dataEspecifica;
             IsAvailable = true;
+            IsDeleted = false;
         }
 
         public Guid RoomId { get; private set; }
@@ -26,5 +27,16 @@ namespace MusicStudio.Core.Domain.Entities
         public TimeSpan EndTime { get; private set; }
         public DateTime date { get; private set; }
         public bool IsAvailable { get; private set; }
+        public bool IsDeleted { get; private set; }
+        public void Update(TimeSpan startTimeNew,TimeSpan endTimeNew,DateTime newDate)
+        {
+            StartTime = startTimeNew;
+            EndTime = endTimeNew;
+            date = newDate;
+        }
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
     }
 }

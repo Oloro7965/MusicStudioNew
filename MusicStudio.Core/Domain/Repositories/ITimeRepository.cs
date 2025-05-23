@@ -10,5 +10,11 @@ namespace MusicStudio.Core.Domain.Repositories
     public interface ITimeRepository
     {
         Task AddAsync(Time time);
+
+        Task<List<Time>> GetAllAsync();
+
+        Task<Time> GetByIdAsync(Guid id);
+
+        Task SaveChangesAsync();
     }
 }

@@ -1,4 +1,5 @@
-﻿using MusicStudio.Core.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MusicStudio.Core.Domain.Entities;
 using MusicStudio.Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,23 @@ namespace MusicStudio.Infraestructure.Persistance.Repositories
         {
             await _dbcontext.TimesScheduled.AddAsync(time);
 
+            await _dbcontext.SaveChangesAsync();
+        }
+
+        public async Task<List<Time>> GetAllAsync()
+        {
+            return await _dbcontext.TimesScheduled.Where(u => u.IsDeleted.Equals(false)).ToListAsync();
+        }
+
+        public async Task<Time> GetByIdAsync(Guid id)
+        {
+            return await _dbcontext.TimesScheduled.Where(c => c.Id == id)
+
+            .SingleOrDefaultAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
             await _dbcontext.SaveChangesAsync();
         }
     }
