@@ -22,7 +22,7 @@ namespace MusicStudio.Application.Queries.GetAllRoomsQuery
         {
             var rooms = await _roomRepository.GetAllAsync();
             //var users = _dbcontext.Users.Where(u => u.IsActive.Equals(true));
-            var roomViewModel = rooms.Select(b => new RoomViewModel(b.Name,b.RegisteredSchedules,b.IsDeleted))
+            var roomViewModel = rooms.Select(b => new RoomViewModel(b.Name,b.RegisteredTimes,b.IsDeleted))
                  .ToList();
 
             return ResultViewModel<List<RoomViewModel>>.Success(roomViewModel);

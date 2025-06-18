@@ -26,7 +26,7 @@ namespace MusicStudio.Application.Queries.GetRoomQuery
                 return ResultViewModel<RoomViewModel>.Error("Este contato não existe");
             }
 
-            var RoomDetailViewModel = new RoomViewModel(room.Name,room.RegisteredSchedules,room.IsDeleted);
+            var RoomDetailViewModel = new RoomViewModel(room.Name,room.RegisteredTimes,room.IsDeleted);
 
             //var UserDetailViewModel = UserViewModel.FromEntity(user);
             return ResultViewModel<RoomViewModel>.Success(RoomDetailViewModel);
